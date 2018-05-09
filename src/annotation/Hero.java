@@ -3,12 +3,13 @@ package annotation;
 public class Hero {
 
     String name;
-    @Override
-    public String toString(){
-        return name;
+
+    @Deprecated
+    public void hackMap(){
+
     }
-//    @Override
-//    public String fromString(){
-//        return name;
-//    }
+    public static void main(String[] args) {
+        new Hero().hackMap();
+    }
+
 }
