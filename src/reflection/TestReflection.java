@@ -1,27 +1,26 @@
 package reflection;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import charactor.Hero;
 
 public class TestReflection {
 
     public static void main(String[] args) {
-        Hero h =new Hero();
-        //使用传统方式修改name的值为garen
-        h.name = "garen";
+        Hero h = new Hero();
+
         try {
-            //获取类Hero的名字叫做name的字段
-            Field f1= h.getClass().getDeclaredField("name");
-            //修改这个字段的值
-//            System.out.println(h.name);
-            f1.set(h, "teemo");
-            //打印被修改后的值
-            System.out.println(h.name);
+            // 获取这个名字叫做setName，参数类型是String的方法
+            Method m = h.getClass().getMethod("setName", String.class);
+            // 对h对象，调用这个方法
+            m.invoke(h, "盖伦");
+            // 使用传统的方式，调用getName方法
+            System.out.println(h.getName());
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
     }
 }

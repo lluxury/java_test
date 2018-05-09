@@ -28,7 +28,8 @@ public class Hero {
         return false;
     }
     public void attackHero(Hero h2) {
-        System.out.println(this.name+ " 正在攻击 " + h2.getName());
+        // TODO Auto-generated method stub
+
     }
 
 }
