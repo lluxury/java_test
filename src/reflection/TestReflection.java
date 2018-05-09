@@ -1,28 +1,36 @@
 package reflection;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import charactor.Hero;
+
 public class TestReflection {
+    public static void main(String[] args) throws InterruptedException {
+        Hero h = getHero();
+        System.out.println(h);
+    }
 
-    public static void main(String[] args) {
-        //传统的使用new的方式创建对象
-        Hero h1 =new Hero();
-        h1.name = "teemo";
-        System.out.println(h1);
+    public static Hero getHero() {
 
-        try {
-            //使用反射的方式创建对象
-            String className = "charactor.Hero";
-            //类对象
-            Class pClass=Class.forName(className);
-            //构造器
-            Constructor c= pClass.getConstructor();
-            //通过构造器实例化
-            Hero h2= (Hero) c.newInstance();
-            h2.name="gareen";
-            System.out.println(h2);
+        File f = new File("C:/cygwin64/home/yann/coding/java/j2se/java_test/hero.config");
+
+        try (FileReader fr = new FileReader(f)) {
+            String className = null;
+            char[] all = new char[(int) f.length()];
+            fr.read(all);
+            className = new String(all);
+            Class clazz=Class.forName(className);
+            Constructor c= clazz.getConstructor();
+            Hero h= (Hero) c.newInstance();
+            return h;
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            return null;
         }
+
     }
 }
