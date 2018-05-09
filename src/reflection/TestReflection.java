@@ -1,36 +1,27 @@
 package reflection;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Field;
 
 import charactor.Hero;
 
 public class TestReflection {
-    public static void main(String[] args) throws InterruptedException {
-        Hero h = getHero();
-        System.out.println(h);
-    }
 
-    public static Hero getHero() {
+    public static void main(String[] args) {
+        Hero h =new Hero();
+        //使用传统方式修改name的值为garen
+        h.name = "garen";
+        try {
+            //获取类Hero的名字叫做name的字段
+            Field f1= h.getClass().getDeclaredField("name");
+            //修改这个字段的值
+//            System.out.println(h.name);
+            f1.set(h, "teemo");
+            //打印被修改后的值
+            System.out.println(h.name);
 
-        File f = new File("C:/cygwin64/home/yann/coding/java/j2se/java_test/hero.config");
-
-        try (FileReader fr = new FileReader(f)) {
-            String className = null;
-            char[] all = new char[(int) f.length()];
-            fr.read(all);
-            className = new String(all);
-            Class clazz=Class.forName(className);
-            Constructor c= clazz.getConstructor();
-            Hero h= (Hero) c.newInstance();
-            return h;
         } catch (Exception e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-            return null;
         }
-
     }
 }
