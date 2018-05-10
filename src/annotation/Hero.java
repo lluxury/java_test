@@ -1,13 +1,10 @@
 package annotation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Hero {
     String name;
-    @SuppressWarnings({ "rawtypes", "unused" })
-    public static void main(String[] args) {
-        List heros = new ArrayList();
-    }
 
+    @SafeVarargs
+    public static <T> T getFirstOne(T... elements) {
+        return elements.length > 0 ? elements[0] : null;
+    }
 }
