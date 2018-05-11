@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 import anno.JDBCConfig;
 
-@JDBCConfig(ip = "192.168.142.10", database = "test", encoding = "UTF-8", loginName = "root", password = "admin")
+@JDBCConfig(ip = "127.0.0.1", database = "test", encoding = "UTF-8", loginName = "root", password = "admin")
+//@JDBCConfig(ip = "127.0.0.1", database = "test", encoding = "UTF-8", loginName = "root", password = "admin")
 public class DBUtil {
     static {
         try {
@@ -18,6 +19,7 @@ public class DBUtil {
 
     public static Connection getConnection() throws SQLException, NoSuchMethodException, SecurityException {
         JDBCConfig config = DBUtil.class.getAnnotation(JDBCConfig.class);
+        System.out.println(config);
 
         String ip = config.ip();
         int port = config.port();
